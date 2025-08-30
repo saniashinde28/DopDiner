@@ -1,0 +1,54 @@
+<% layout("layout/boilerplate") %>
+<body>
+
+<h2>Add a New Dopamine Dish</h2>
+
+<form action="/listings" method="POST" style="max-width: 500px; margin: auto;">
+    <div style="margin-bottom: 15px;">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="listing[title]" required style="width: 100%;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="category">Category:</label><br>
+        <select id="category" name="listing[category]" required style="width: 100%;">
+            <option value="">--Select--</option>
+            <option value="Starter">Starter</option>
+            <option value="Main Course">Main Course</option>
+            <option value="Dessert">Dessert</option>
+        </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="listing[description]" rows="4" required style="width: 100%;"></textarea>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="mood_benefit">Mood Benefits :</label><br>
+        <input type="text" id="mood_benefit" name="listing[mood_benefit]" placeholder="e.g. Relaxation, Calmness" style="width: 100%;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="tools_needed">Tools Needed :</label><br>
+        <input type="text" id="tools_needed" name="listing[tools_needed]" placeholder="e.g. Essential oils, Candles" style="width: 100%;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="tags">Tags :</label><br>
+        <input type="text" id="tags" name="listing[tags]" placeholder="e.g. self-care, aromatherapy" style="width: 100%;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="icon_url">Icon URL:</label><br>
+        <input type="url" id="icon_url" name="listing[icon_url]" placeholder="Paste icon image link" style="width: 100%;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="time_required">Time Required (in minutes):</label><br>
+        <input type="number" id="time_required" name="listing[time_required]" min="1" placeholder="e.g. 15" style="width: 100%;">
+    </div>
+
+    <button type="submit" style="padding: 10px 20px;">Submit</button>
+</form>
+</body>

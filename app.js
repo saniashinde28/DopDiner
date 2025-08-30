@@ -5,6 +5,8 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 
+app.engine("ejs", ejsMate);
+
 const mongo_url= 'mongodb://127.0.0.1:27017/dopamine';
 
 main().then(()=>console.log("connected to db"))
@@ -19,6 +21,8 @@ async function main(){
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
+// Serve static files from "public" folder
+app.use(express.static('public'));
 
 app.get("/",(req,res)=>{
     res.send("root");
