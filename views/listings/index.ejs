@@ -12,6 +12,37 @@
         <h1 style="font-size: 25px; margin: 14px 0 0 0; line-height: 1;"><b>DopDiner</b></h1>
     </div>
 
+    <div class="hero_sec">
+        <h1>Caught Scrolling Again?</h1>
+        <h2>We've got something better for your brain</h2>
+       <p>Choose from our menu of mood-boosting activities designed to give you genuine satisfaction.</p>
+       <p>Because life's too short for empty content.</p>
+       <p>Start your dopamine menu journey today.</p>
+
+       <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-content">
+                <h3>5-Minute Boost</h3>
+                <p>Quick dopamine activities</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-content">
+                <h3>Real Results</h3>
+                <p>Genuine satisfaction guaranteed</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    
+
+    <!-- Navbar -->
+  <%- include("../includes/navbar.ejs") %>
+    
 
 
 
@@ -19,7 +50,7 @@
 
 
 
-    <h3>dopamine menu</h3>
+    
     <ul>
         <%for(let listings of allListings){%>
             <li><a href="listings/<%=listings._id%>"><%=listings.title%></a></li>
