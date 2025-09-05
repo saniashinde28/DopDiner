@@ -7,7 +7,7 @@ const sampleListings =
     mood_benefit: ["Relaxation", "Calmness"],
     tools_needed: ["Essential oils", "Diffuser", "Scented candles"],
     tags: ["self-care", "aromatherapy", "relaxation"],
-    icon_url: "https://cdn-icons-png.flaticon.com/512/483/483356.png"
+    icon_url: "/images/aromatherapy.png"
   },
   {
     title: "Fresh Flowers Uplift",
@@ -16,7 +16,7 @@ const sampleListings =
     mood_benefit: ["Joy", "Appreciation"],
     tools_needed: ["Vase", "Flowers"],
     tags: ["decor", "nature", "mood boost"],
-    icon_url: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
+    icon_url: "/images/flowers.png"
   },
   {
     title: "Comfort Sips & Green Sips",
@@ -25,7 +25,7 @@ const sampleListings =
     mood_benefit: ["Comfort", "Hydration"],
     tools_needed: ["Mug", "Juicer", "Ingredients"],
     tags: ["nutrition", "hydration", "comfort"],
-    icon_url: "https://cdn-icons-png.flaticon.com/512/3500/3500893.png"
+    icon_url: "/images/tea.png"
   },
   {
     title: "Feel-Good Snacking",

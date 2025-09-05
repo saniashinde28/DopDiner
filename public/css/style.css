@@ -100,6 +100,75 @@ body::-webkit-scrollbar {
     text-align: center;
 }
 
+/* === SHOW SEC === */
+/* Reset body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container */
+.listing-container {
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    padding: 40px 30px;
+}
+
+/* Icon Styling */
+.listing-icon img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 2px solid #b0bec5; /* subtle accent */
+}
+
+/* Title */
+.listing-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Listing Details */
+.listing-details {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: left;
+    border-top: 1px solid #e0e0e0; /* subtle top border */
+}
+
+.listing-details li {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e0e0e0; /* divider between items */
+    background-color: #ffffff;
+    transition: background 0.3s;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.listing-details li:hover {
+    background-color: #f1f3f5; /* very subtle hover */
+}
+
+.listing-details li strong {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+
 
 /* === Footer === */
 .f-social-links a :hover{
