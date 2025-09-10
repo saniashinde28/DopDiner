@@ -11,25 +11,29 @@
   <nav class="flex justify-between px-6">
     
     <!-- All -->
-    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5 active-category">
+    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5 active-category"
+            onclick="filterCategory('All')">
       All
       <span class="absolute left-0 -bottom-1 w-full h-0.5 bg-purple-600 transition-all duration-300"></span>
     </button>
 
     <!-- Starter -->
-    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5">
+    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5"
+            onclick="filterCategory('Starter')">
       Starter
       <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
     </button>
 
     <!-- Main Course -->
-    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5">
+    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5"
+            onclick="filterCategory('Main Course')">
       Main Course
       <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
     </button>
 
     <!-- Dessert -->
-    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5">
+    <button class="category-btn relative group text-gray-700 font-medium px-5 py-1.5"
+            onclick="filterCategory('Dessert')">
       Dessert
       <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
     </button>
@@ -37,27 +41,37 @@
   </nav>
 </div>
 
-
 <script>
-const buttons = document.querySelectorAll('.category-btn');
+// Function to fetch filtered listings and update grid
+async function filterCategory(category) {
+    try {
+        // Fetch filtered listings page from server
+        const res = await fetch(`/listings?category=${category}`);
+        const htmlText = await res.text();
 
-buttons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Remove active styles from all buttons
-    buttons.forEach(b => {
-      b.classList.remove('bg-purple-100', 'shadow-lg', 'rounded-lg', 'text-purple-600');
-      const underline = b.querySelector('span');
-      underline.style.width = '0';
-    });
+        // Parse returned HTML and extract the listings grid
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const newGrid = doc.querySelector('.grid');
 
-    // Add active styles to clicked button
-    btn.classList.add('bg-purple-100', 'shadow-lg', 'rounded-lg', 'text-purple-600');
-    const underline = btn.querySelector('span');
-    underline.style.width = '100%';
-  });
-});
+        // Replace current listings grid with filtered listings
+        const currentGrid = document.querySelector('.grid');
+        currentGrid.innerHTML = newGrid.innerHTML;
 
-// Initialize "All" as active
+        // Update active button styles
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            if (btn.textContent.trim() === category) {
+                btn.classList.add('bg-purple-100', 'shadow-lg', 'rounded-lg', 'text-purple-600');
+            } else {
+                btn.classList.remove('bg-purple-100', 'shadow-lg', 'rounded-lg', 'text-purple-600');
+            }
+        });
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// Initialize "All" as active on page load
 const initial = document.querySelector('.active-category');
 initial.classList.add('bg-purple-100', 'shadow-lg', 'rounded-lg', 'text-purple-600');
 </script>

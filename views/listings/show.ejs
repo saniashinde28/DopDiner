@@ -1,28 +1,51 @@
 <% layout("layout/boilerplate") %>
+<link rel="stylesheet" href="/css/show.css">
 
-<body>
-    <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0; padding-top: 20px; margin-left: 200px;">
-        <img src="/images/image.png" alt="DopDiner Image" style="height: 50px; width: auto;">
-        <h1 style="font-size: 25px; margin: 14px 0 0 0; line-height: 1;"><b>DopDiner</b></h1>
+<%- include("../includes/logo.ejs") %>
+
+<div class="listing-container">
+    <!-- Icon at the top -->
+    <% if(listing.icon_url) { %>
+        <div class="listing-icon">
+            <img src="<%= listing.icon_url %>" alt="Icon">
+        </div>
+    <% } %>
+
+    <!-- Listing Title -->
+    <h1 class="listing-title"><%= listing.title %></h1>
+
+    <!-- Listing Details -->
+<ul class="listing-details">
+    <li><strong>Category:</strong> <%= listing.category %></li>
+    <li><strong>Description:</strong> <%= listing.description %></li>
+
+    <li><strong>Tools Needed:</strong>
+        <div class="tool-container">
+            <% listing.tools_needed.forEach(function(tool) { %>
+                <div class="tool-item"><%= tool %></div>
+            <% }); %>
+        </div>
+    </li>
+    <li><strong>Tags:</strong>
+        <div class="tag-container">
+            <% listing.tags.forEach(function(tag) { %>
+                <div class="tag"><%= tag %></div>
+            <% }); %>
+        </div>
+    </li>
+
+<li><strong>Mood Benefit:</strong>
+    <div class="mood-container">
+        <% listing.mood_benefit.forEach(function(benefit) { %>
+            <div class="mood-badge"><%= benefit %></div>
+        <% }); %>
     </div>
-    <div class="listing-container">
-        <!-- Icon at the top -->
-        <% if(listing.icon_url) { %>
-            <div class="listing-icon">
-                <img src="<%= listing.icon_url %>" alt="Icon">
-            </div>
-        <% } %>
+</li>
 
-        <!-- Listing Title -->
-        <h1 class="listing-title"><%= listing.title %></h1>
 
-        <!-- Listing Details -->
-        <ul class="listing-details">
-            <li><strong>Category:</strong> <%= listing.category %></li>
-            <li><strong>Description:</strong> <%= listing.description %></li>
-            <li><strong>Mood Benefit:</strong> <%= listing.mood_benefit %></li>
-            <li><strong>Tools Needed:</strong> <%= listing.tools_needed %></li>
-            <li><strong>Tags:</strong> <%= listing.tags %></li>
-        </ul>
-    </div>
-</body>
+
+</ul>
+
+
+
+</div>

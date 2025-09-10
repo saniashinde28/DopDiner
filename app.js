@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
 const path = require("path");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 app.engine("ejs", ejsMate);
 
@@ -24,26 +26,36 @@ app.use(express.urlencoded({extended:true}));
 // Serve static files from "public" folder
 app.use(express.static('public'));
 
-app.get("/",(req,res)=>{
-    res.send("root");
 
-});
+// Index route with optional category filtering
+app.get("/listings", wrapAsync(async (req, res) => {
+    const category = req.query.category; // Get category from query string
 
-
-//Index route
-app.get("/listings",async (req,res)=>{
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
-    
+    let query = {};
+    if (category && category !== "All") {
+        query.category = category; // Filter only if category is not "All"
     }
-);
+
+    const allListings = await Listing.find(query);
+
+    // Pass selectedCategory to EJS to highlight active navbar button
+    res.render("listings/index.ejs", { 
+        allListings, 
+        selectedCategory: category || "All"
+    });
+}));
+
+
 
 //Show route
-app.get("/listings/:id",async(req,res)=>{
+app.get("/listings/:id",wrapAsync(async(req,res)=>{
     let {id} = req.params;
     const listing = await Listing.findById(id);
+    if(!listing){
+        throw new ExpressError(404, "Listing not found");
+    }
     res.render("listings/show.ejs",{listing});
-});
+}));
 
 
 // app.get("/testListing",async (req,res)=>{
@@ -62,6 +74,21 @@ app.get("/listings/:id",async(req,res)=>{
 //   res.send("successful testing");
 
 // });
+
+
+
+app.use((req,res,next)=>{
+    next(new ExpressError(404,"PAGE NOT FOUND!"));
+});
+
+//Custom ERROR Handling
+app.use((err,req,res,next)=>{
+    let {statusCode=500,message="NOT FOUND"} = err;
+    res.status(statusCode).send(message);
+    //res.status(statusCode).send(message);
+    }
+);
+
 
 app.listen(8080,()=>{
     console.log("server is listening!");
