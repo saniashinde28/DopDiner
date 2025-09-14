@@ -1,0 +1,11 @@
+<% if(errorMsg && errorMsg.length){ %>
+<div class="relative max-w-md mx-auto mt-4 bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded-md text-sm shadow-md" role="alert">
+  <span class="block sm:inline"><%= errorMsg %></span>
+  <button type="button" 
+          class="absolute top-0 right-0 mt-1 mr-2 text-red-700 hover:text-red-900"
+          onclick="this.parentElement.remove()"
+          aria-label="Close">
+    ✕
+  </button>
+</div>
+<% } %>

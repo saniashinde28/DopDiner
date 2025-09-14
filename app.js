@@ -6,6 +6,31 @@ const path = require("path");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const flash = require("connect-flash");
+
+const sessionOptions ={
+    secret:"mysupersecretcode",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*24*60*60*1000,
+        httpOnly:true,
+    },
+};
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.errorMsg=req.flash("error");
+    next();
+});
+
+
+const listings = require("./routes/listing.js");
 
 app.engine("ejs", ejsMate);
 
@@ -26,38 +51,6 @@ app.use(express.urlencoded({extended:true}));
 // Serve static files from "public" folder
 app.use(express.static('public'));
 
-
-// Index route with optional category filtering
-app.get("/listings", wrapAsync(async (req, res) => {
-    const category = req.query.category; // Get category from query string
-
-    let query = {};
-    if (category && category !== "All") {
-        query.category = category; // Filter only if category is not "All"
-    }
-
-    const allListings = await Listing.find(query);
-
-    // Pass selectedCategory to EJS to highlight active navbar button
-    res.render("listings/index.ejs", { 
-        allListings, 
-        selectedCategory: category || "All"
-    });
-}));
-
-
-
-//Show route
-app.get("/listings/:id",wrapAsync(async(req,res)=>{
-    let {id} = req.params;
-    const listing = await Listing.findById(id);
-    if(!listing){
-        throw new ExpressError(404, "Listing not found");
-    }
-    res.render("listings/show.ejs",{listing});
-}));
-
-
 // app.get("/testListing",async (req,res)=>{
 //     let sampleListing = new Listing({
 //     title: "Aroma Therapy",
@@ -76,9 +69,17 @@ app.get("/listings/:id",wrapAsync(async(req,res)=>{
 // });
 
 
+app.use("/listings",listings);
+
 
 app.use((req,res,next)=>{
     next(new ExpressError(404,"PAGE NOT FOUND!"));
+});
+
+app.use((err,req,res,next)=>{
+    if(err.name=="CastError"){
+        res.send("CastError");
+    }
 });
 
 //Custom ERROR Handling
