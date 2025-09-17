@@ -1,4 +1,28 @@
-<div style="display: flex; align-items: center; justify-content: flex-start; gap: 0; padding-top: 20px; margin-left: 200px;">
-        <img src="/images/image.png" alt="DopDiner Image" style="height: 50px; width: auto;">
-        <h1 style="font-size: 25px; margin: 14px 0 0 0; line-height: 1;"><b>DopDiner</b></h1>
-</div>
+<!-- Navbar -->
+<nav style="position: relative; width: 100%; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: flex-start; padding: 15px 40px; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 0; font-family: 'Poppins', sans-serif; overflow: hidden;">
+  
+  <!-- Background div -->
+  <div
+    style="
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
+        radial-gradient(circle 500px at 20% 80%, rgba(139,92,246,0.3), transparent),
+        radial-gradient(circle 500px at 80% 20%, rgba(59,130,246,0.3), transparent);
+      background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+    "
+  ></div>
+
+  <!-- Navbar content -->
+  <a href="/" style="display: flex; align-items: center; text-decoration: none; color: inherit; position: relative; z-index: 10;">
+  <img src="/images/image.png" alt="DopDiner Logo" style="height: 50px; width: auto; margin-right: 0 ;">
+  <h1 style="font-size: 25px; margin: 0; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; top: 2px;">
+    DopDiner
+  </h1>
+</a>
+
+</nav>
